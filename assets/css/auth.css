@@ -1,0 +1,182 @@
+/* auth.css — Clean form with icons and soft blue theme */
+
+.auth-page {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(120deg, #f7faff 0%, #eef6ff 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+/* Card Container */
+.auth-card {
+  width: 420px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 2.2rem;
+  margin-right: 6vw;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+  border: 1px solid rgba(194, 220, 255, 0.5);
+}
+
+/* Heading */
+.auth-card h1 {
+  text-align: center;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.6rem;
+  color: #1c2b33;
+  font-weight: 700;
+}
+
+/* Input field wrapper */
+.input-with-icon {
+  position: relative;
+  margin-bottom: 0.9rem;
+}
+
+/* Input fields */
+.input-with-icon input {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 3rem;
+  border-radius: 12px;
+  border: 1px solid rgba(194, 220, 255, 0.8);
+  background: #fff;
+  font-size: 1rem;
+  color: #1c2b33;
+  transition: 0.2s ease;
+  outline: none;
+}
+
+.input-with-icon input::placeholder {
+  color: #8fa5ba;
+}
+
+.input-with-icon input:focus {
+  border-color: #99c5ff;
+  box-shadow: 0 0 0 3px rgba(194, 220, 255, 0.4);
+}
+
+/* Icons */
+.input-with-icon .left-icon {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  color: #c2dcff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Right icon for password toggle */
+.input-with-icon .right-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #c2dcff;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.input-with-icon .right-icon:hover {
+  color: #99c5ff;
+}
+
+/* Button */
+.btn-primary {
+  width: 100%;
+  background-color: #c2dcff;
+  color: #0f1724;
+  border: none;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.btn-primary:hover {
+  background-color: #99c5ff;
+}
+
+/* Bottom text link */
+.bottom-link {
+  text-align: center;
+  margin-top: 1.2rem;
+  color: #1c2b33;
+  font-size: 0.95rem;
+}
+.bottom-link a {
+  color: #99c5ff;
+  font-weight: 600;
+  text-decoration: none;
+}
+.bottom-link a:hover {
+  text-decoration: underline;
+}
+
+/* Error box */
+.alert-danger {
+  background: #fff2f2;
+  border: 1px solid #ffcfcf;
+  color: #a73030;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Success box */
+.alert-success {
+  background: #f2fff5;
+  border: 1px solid #cfffd6;
+  color: #30a74e;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive (center on mobile) */
+@media (max-width: 820px) {
+  .auth-page {
+    justify-content: center;
+    padding: 1.25rem;
+  }
+  .auth-card {
+    width: 100%;
+    max-width: 400px;
+    margin-right: 0;
+  }
+}
+
+/* --- Decorative side image --- */
+.side-decor-image {
+  position: absolute;
+  left: 200px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 75vh;
+  width: auto;
+  border-radius: 20px 20px 20px 20px;
+  object-fit: cover;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+  z-index: 0;
+  opacity: 0.95;
+}
+
+/* make sure your form sits above it */
+.auth-page, .auth-card {
+  position: relative;
+  z-index: 1;
+}
+
+/* responsive - hide image on small screens */
+@media (max-width: 900px) {
+  .side-decor-image {
+    display: none;
+  }
+}

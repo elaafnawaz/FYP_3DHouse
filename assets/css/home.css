@@ -1,0 +1,7 @@
+/* home.css - hero + mock device */
+.device-mock{position:relative;border-radius:14px;overflow:hidden;background:linear-gradient(180deg,#eef6ff,#f9fbff);padding:0.5rem;box-shadow:0 18px 40px rgba(16,24,40,0.06)}
+.device-mock img{border-radius:10px;display:block}
+.device-badge{position:absolute;left:12px;top:12px;background:rgba(12,18,40,0.85);color:#fff;padding:0.35rem 0.6rem;border-radius:8px;font-size:0.8rem}
+.section-title{font-size:1.2rem;margin-bottom:0.75rem;font-weight:700}
+.hero-left .hero-features li::before{content:'•';display:inline-block;margin-right:0.5rem;color:var(--accent)}
+.feature-card h3{margin-top:0;margin-bottom:0.5rem;font-size:1rem}
