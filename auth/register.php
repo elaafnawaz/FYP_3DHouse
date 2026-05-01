@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($password !== $password2) $errors[] = 'Passwords do not match.';
 
     // Phone: allow empty OR digits only between 9 and 13 (adjust as needed)
-    if ($phone_no !== '' && !preg_match('/^[0-9]{9,13}$/', $phone_no)) {
+    if ($phone_no === '' || !preg_match('/^[0-9]{9,13}$/', $phone_no)) {
         $errors[] = 'Enter a valid phone number (9–13 digits).';
     }
 
@@ -159,15 +159,16 @@ require_once __DIR__ . '/../includes/header.php';
         </div>
 
         <input
-            id="phone_no"
-            type="tel"
-            name="phone_no"
-            placeholder="Phone Number"
-            value="<?= htmlspecialchars($old['phone_no']) ?>"
-            pattern="[0-9]{9,13}"
-            maxlength="20"
-            inputmode="numeric"
-            autocomplete="tel"/>
+          id="phone_no"
+          type="tel"
+          name="phone_no"
+          placeholder="Phone Number"
+          value="<?= htmlspecialchars($old['phone_no']) ?>"
+          required
+          pattern="[0-9]{9,13}"
+          maxlength="20"
+          inputmode="numeric"
+          autocomplete="tel"/>
       </div>
 
       <div class="input-with-icon">

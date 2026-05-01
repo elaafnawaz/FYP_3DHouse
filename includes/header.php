@@ -29,7 +29,7 @@ require_once __DIR__ . '/config.php';
       <a href="<?= BASE_URL ?>" class="nav-link">Home</a>
       <a href="<?= BASE_URL ?>#features" class="nav-link">Features</a>
       <a href="<?= BASE_URL ?>#how" class="nav-link">How it works</a>
-      <a href="<?= BASE_URL ?>#demo" class="nav-link">Demo</a>
+      <a href="<?= BASE_URL ?>demo.php" class="nav-link">Demo</a>
       <?php if (!empty($_SESSION['user_id'])): ?>
         <a href="<?= BASE_URL ?>dashboard/" class="nav-link">Dashboard</a>
         <a href="<?= BASE_URL ?>auth/logout.php" class="nav-link">Logout</a>

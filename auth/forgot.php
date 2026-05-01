@@ -35,19 +35,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $stmt->close();
 
-            // generate token
-            $token = bin2hex(random_bytes(32));
-            $expires = date('Y-m-d H:i:s', time() + 3600);
+            // generate 6-digit code instead of token
+            $code = str_pad(random_int(100000, 999999), 6, '0', STR_PAD_LEFT);
+            $expires = date('Y-m-d H:i:s', time() + 1800); // 30 minutes
 
-            // save token
+            // delete old codes for this email
+            $mysqli->query("DELETE FROM password_resets WHERE email = '" . $mysqli->real_escape_string($email) . "'");
+
+            // save code
             $ins = $mysqli->prepare("INSERT INTO password_resets (email, token, expires_at) VALUES (?, ?, ?)");
             if ($ins) {
-                $ins->bind_param('sss', $email, $token, $expires);
+                $ins->bind_param('sss', $email, $code, $expires);
                 $ins->execute();
                 $ins->close();
-
-                // RESET LINK
-                $resetUrl = rtrim(BASE_URL, '/') . "/auth/reset_password.php?token=" . urlencode($token);
 
                 // SEND EMAIL USING GMAIL SMTP
                 $mail = new PHPMailer(true);
@@ -57,29 +57,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
 
-                    // 🔴 CHANGE THESE
                     $mail->Username = 'nawazelaaf@gmail.com';
                     $mail->Password = 'wcex uuce zufu hyyn';
 
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
-                    $mail->setFrom('YOUR_EMAIL@gmail.com', '3D VR House System');
+                    $mail->setFrom('nawazelaaf@gmail.com', '3D VR House System');
                     $mail->addAddress($email);
 
                     $mail->isHTML(true);
-                    $mail->Subject = 'Password Reset Request';
+                    $mail->Subject = 'Password Reset Code';
 
                     $mail->Body = "
                         <h3>Password Reset</h3>
-                        <p>Click the link below to reset your password:</p>
-                        <a href='$resetUrl'>Reset Password</a>
-                        <p>This link will expire in 1 hour.</p>
+                        <p>Your verification code is:</p>
+                        <h2 style='color: #4CAF50; font-size: 32px; letter-spacing: 5px;'>$code</h2>
+                        <p>Enter this code on the website to reset your password.</p>
+                        <p>This code will expire in 30 minutes.</p>
                     ";
 
                     $mail->send();
 
-                    $notice = "Reset link has been sent to your email.";
+                    // Store email in session
+                    $_SESSION['reset_email'] = $email;
+
+                    // Redirect to verify code page
+                    header('Location: verify_code.php');
+                    exit;
 
                 } catch (Exception $e) {
                     $errors[] = "Email could not be sent. Error: " . $mail->ErrorInfo;
@@ -128,9 +133,13 @@ require_once __DIR__ . '/../includes/header.php';
   </div>
   <input type="email" name="email" placeholder="Enter your account email" required>
 </div>
-      <button type="submit" class="btn-primary">Send reset link</button>
+      <button type="submit" class="btn-primary">Send verification code</button>
     </form>
 
+  </div>
+
+  <div class="side-image">
+    <img src="<?= BASE_URL ?>assets/images/Housemodel.png" alt="Reset password side image" class="side-decor-image">
   </div>
 </div>
 
